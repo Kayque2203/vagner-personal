@@ -15,3 +15,9 @@ Fotos: `assets/images/` (troque mantendo os nomes ou ajuste em `index.html`).
 5. Aguarde 1 a 2 minutos e acesse `https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/` (o link também aparece no topo da página de Pages).
 
 Todos os caminhos são relativos (sem `/` inicial), então funciona nesse endereço de projeto.
+
+## Antes e depois dos alunos
+1. Coloque as fotos em `assets/images/` (ex.: `antes-01.jpg`, `depois-01.jpg`). Use fotos verticais (3:4), do mesmo tamanho e enquadramento, e só com autorização por escrito do aluno.
+2. Em `js/config.js`, preencha `transformacoes`:
+   `{nome:"Carlos, 32 anos", antes:"assets/images/antes-01.jpg", depois:"assets/images/depois-01.jpg", tempo:"4 meses", legenda:"-12 kg de gordura"}`
+3. A seção "Resultados" e o item no menu aparecem sozinhos. Sem itens, ficam ocultos.

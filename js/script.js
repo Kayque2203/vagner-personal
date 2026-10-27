@@ -78,3 +78,31 @@
   $("lbP").addEventListener("click",function(){show(i-1)});$("lbN").addEventListener("click",function(){show(i+1)});
   lb.addEventListener("keydown",function(e){if(e.key==="ArrowLeft")show(i-1);if(e.key==="ArrowRight")show(i+1)});
 })();
+
+/* ===== antes e depois ===== */
+(function(){
+  var S=window.SITE||{},lista=(S.transformacoes||[]).filter(function(t){return t&&t.antes&&t.depois});
+  if(!lista.length)return;
+  var $=function(i){return document.getElementById(i)};
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e}
+  function img(src,alt,c){var i=new Image();i.src=src;i.alt=alt;i.loading="lazy";i.decoding="async";i.width=900;i.height=1200;if(c)i.className=c;return i}
+  lista.forEach(function(t){
+    var nome=t.nome||"aluno",f=el("figure","ad"),box=el("div","ad-box");
+    box.appendChild(img(t.antes,"Antes: "+nome));
+    box.appendChild(img(t.depois,"Depois: "+nome,"dep"));
+    var a=el("span","ad-tag a","Antes"),d=el("span","ad-tag d","Depois");a.setAttribute("aria-hidden","true");d.setAttribute("aria-hidden","true");
+    box.appendChild(a);box.appendChild(d);
+    box.appendChild(el("span","ad-knob","↔")).setAttribute("aria-hidden","true");
+    var r=document.createElement("input");r.type="range";r.min=0;r.max=100;r.value=50;r.step=1;
+    r.setAttribute("aria-label","Comparar antes e depois de "+nome);
+    r.addEventListener("input",function(){box.style.setProperty("--p",r.value+"%")});
+    box.appendChild(r);f.appendChild(box);
+    var c=el("figcaption");c.appendChild(el("b",0,nome));
+    if(t.tempo)c.appendChild(el("span","tm",t.tempo));
+    if(t.legenda)c.appendChild(el("span",0,t.legenda));
+    f.appendChild(c);$("resLista").appendChild(f);
+  });
+  if(S.avisoResultados)$("resAviso").textContent=S.avisoResultados;else $("resAviso").hidden=true;
+  $("resultados").hidden=false;
+  var li=document.querySelector('[data-sec="resultados"]');if(li)li.hidden=false;
+})();
